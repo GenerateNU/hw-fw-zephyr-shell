@@ -1,0 +1,69 @@
+# Turns on every built-in Zephyr shell command module that makes sense for a
+# general purpose board.
+#
+# 'imply' (instead of setting CONFIG_...=y in prj.conf) means each option is
+# only turned on if the board/SoC can actually support it. So the same template
+# builds on any board without Kconfig warnings, and you just get the commands
+# your hardware has. To turn one off, set it to =n in prj.conf, e.g.
+#   CONFIG_CAN_SHELL=n
+
+config APP_ENABLE_ALL_SHELL_CMDS
+	bool "Enable all built-in Zephyr shell commands"
+	default y
+	depends on SHELL
+	# --- peripheral subsystems (needed for their shell commands to exist) ---
+	imply GPIO
+	imply I2C
+	imply SPI
+	imply ADC
+	imply PWM
+	imply SENSOR
+	imply FLASH
+	imply FLASH_PAGE_LAYOUT
+	imply FLASH_MAP
+	imply COUNTER
+	imply WATCHDOG
+	imply RTC
+	imply EEPROM
+	imply LED
+	imply REGULATOR
+	imply DAC
+	imply CAN
+	imply I2S
+	imply INPUT
+	imply HWINFO
+	imply COMPARATOR
+	imply STATS
+	imply CRC
+	# --- system / kernel commands ---
+	imply KERNEL_SHELL
+	imply DEVICE_SHELL
+	imply DATE_SHELL
+	imply DEVMEM_SHELL
+	imply HWINFO_SHELL
+	imply STATS_SHELL
+	imply CRC_SHELL
+	# --- peripheral commands ---
+	imply GPIO_SHELL
+	imply I2C_SHELL
+	imply SPI_SHELL
+	imply UART_SHELL
+	imply ADC_SHELL
+	imply PWM_SHELL
+	imply SENSOR_SHELL
+	imply FLASH_SHELL
+	imply FLASH_MAP_SHELL
+	imply COUNTER_SHELL
+	imply WDT_SHELL
+	imply RTC_SHELL
+	imply EEPROM_SHELL
+	imply LED_SHELL
+	imply REGULATOR_SHELL
+	imply DAC_SHELL
+	imply CAN_SHELL
+	imply I2S_SHELL
+	imply INPUT_SHELL
+	imply COMPARATOR_SHELL
+	imply CLOCK_CONTROL_NRF_SHELL
+
+source "Kconfig.zephyr"
